@@ -1,7 +1,9 @@
 import { Router } from 'express';
-import {getUser,getAllUsers,createUser} from "../controller/usersUtils.js"
+import usersUtils from "../controller/usersUtils.js"
 export const usersRoute = Router()
 
-usersRoute.get("",getAllUsers)
+const {getAllUsers,getUser,createUser}= usersUtils
+
+usersRoute.get("/",getAllUsers)
 usersRoute.get("/:id",getUser)
-usersRoute.post("",createUser)
+usersRoute.post("/",createUser)

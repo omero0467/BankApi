@@ -1,4 +1,6 @@
 import { Router } from "express";
+import { accountRoute } from "./bankAccouns.Route.js";
+import { usersRoute } from "./bankUsers.Route.js";
 
 
 `/accounts[
@@ -10,9 +12,6 @@ import { Router } from "express";
    
 
 
-import { Router } from 'express';
-import { accountRoute } from "./bankAccouns.Route.js";
-import { usersRoute } from "./bankUsers.Route.js";
 
 export const indexRoute = Router();
 
@@ -31,15 +30,15 @@ indexRoute.use('/users', usersRoute);
     }`
 
     //? UPDATE user? -----
-    function transfer()
-    function withdraw()
-    function deposit()
-    function checkCash()
-    function checkCredit()
+    // function transfer()
+    // function withdraw()
+    // function deposit()
+    // function checkCash()
+    // function checkCredit()
     // function checkAccounts()
 
     // --------
-    function loadUsers()
-    function loadAccounts()
-    function saveAccounts()
-    function saveUsers();
+    // function loadUsers()
+    // function loadAccounts()
+    // function saveAccounts()
+    // function saveUsers();
