@@ -15,10 +15,10 @@ import { usersRoute } from "./bankUsers.Route.js";
 
 export const indexRoute = Router();
 
-//localhost:8000/api/accounts
-indexRoute.use('/accounts', accountRoute);
+//localhost:5001/api/action
+indexRoute.use('/action', accountRoute);
 
-//localhost:8000/api/users
+//localhost:5001/api/users
 indexRoute.use('/users', usersRoute);
 
 `/users[

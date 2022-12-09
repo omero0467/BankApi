@@ -34,12 +34,11 @@ const {dbUsersPath,dbAccountsPath} = paths()
 
 // const dataa = [{id:"fcd91c75-c746-4eb7-b998-48161e5e3bfb",credit:1000,cash:50}]
 // saveData(dbAccountsPath,dataa);
-
 //----------------------------------------------------------------------------------------------!!!!!!!!!!
 
 
 export  {loadData,saveData,paths}
 
 
-
+//writeHead({Content-Type:text/html})
 
