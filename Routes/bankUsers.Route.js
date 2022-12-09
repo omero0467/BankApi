@@ -6,4 +6,4 @@ export const usersRoute = Router()
 usersRoute.get("/",getAllUsers)
 usersRoute.get("/:id",getUser)
 usersRoute.post("/",createUser)
-// usersRoute.patch("/:id",appendAccount)
+

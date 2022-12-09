@@ -35,16 +35,8 @@ const createUser = (req,res) => {
       res.status(404).send("No User was created, please fill in the Body (raw) the necessary Fields,(name & lastName) ")
    }
 
-
    
    
 export  {getAllUsers,getUser,createUser}
 
-// `{
-//    userid:BashirEvron //req.body.userid
-//    id:1234
-//    cash:1000
-//    credit:100
-//    accounts:[12332,asd233]
-// }`
 

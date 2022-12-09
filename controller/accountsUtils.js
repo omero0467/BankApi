@@ -90,14 +90,66 @@ const depositAccount = (req,res) =>{
         }else {res.status(403).send("amount must be posistive integer")}
     }
 
+    
+    const transfer =  (req,res)=>{
+        const accounts = loadData(dbAccountsPath)
+        const idFrom = req.body.from
+        const idTo = req.body.to
+        const amount = req.body.amount
+        let bobo ;
+        let sender = accounts.find((account)=> account.id === idFrom)
+        let getter = accounts.find((account)=> account.id === idTo)
+        if(!sender || !getter ){
+            if(!sender &&getter){ return res.status(400).send(`Bad Request: "from" wrong id ,with id: ${idFrom}`)}
+            else if(!getter &&sender){ return res.status(400).send(`Bad Request: "to" wrong id ,with id: ${idTo}`)}
+            else{ res.status(404).send("Accounts IDs' not Found!")}
+        }
+        accounts.forEach((account)=>{
+            if(account.id === req.body.from){
+                withdraw(account,amount) ? null : bobo=true
+            } else if(account.id === req.body.to){
+                if(!bobo){
+                    deposit(account,amount)
+                }
+            } 
+        })
+        if(bobo){
+            return res.status(200).send(`Sender account doesn't have enough cash to transfer `)
+        }
+        saveData(dbAccountsPath,accounts)
+        return res.status(200).send("Transfer has been made successfully")
+    }
+
+    const deleteAccount=(req,res)=>{
+        const accounts = loadData(dbAccountsPath).filter((account)=>account.id!==req.body.accountId)
+        
+        if(accounts.length===0){
+            return res.status(404).send("Account id not found")
+        }
+        saveData(dbAccountsPath, accounts)
+        return res.status(200).send("Account Deleted succesfully")
+    }
+
+    const updateCredit = (req,res) =>{
+        const accounts = loadData(dbAccountsPath)
+        const amount = req.body.credit
+        const foundAccount = accounts.some((account)=>account.id===req.body.accountId)
+        if(foundAccount){
+            accounts.forEach((account)=>{if (account.id===req.body.accountId){  account.credit = amount}})
+            saveData(dbAccountsPath,accounts)
+            return res.status(200).send("Account Credit Updated")
+        }
+        return res.status(404).send('Account id not found')
+    }
+
     const withdraw = (acc,amount)=>{
         const  {credit, cash} = acc
         return cash + credit >= amount ? acc.cash = cash - amount : false;
     }   
 
     const deposit = (acc,amount) =>{
-        const {cash} = acc
-        return acc ? acc.cash = cash + amount : false
+        const {cash,credit} = acc
+        return  acc ? acc.cash = cash + amount : false
     }
     
-export { getAccountById, createAcount, withdrawFromAccount, depositAccount };
+export { getAccountById, createAcount, withdrawFromAccount, depositAccount, transfer, deleteAccount, updateCredit };
